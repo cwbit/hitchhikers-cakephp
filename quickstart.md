@@ -33,18 +33,16 @@ An `Entity` represents a single record (e.g from the database)
   - `$this->_getName(){ return $this->first_name . ' ' $this->last_name }` available as `$ewok->name`
 
 ##### Table
-A `Table` represents the structure that holds the records; a collection of [Entities](#entity)
+A `Table` represents the structure that holds the records; a collection of [Entities](#entity). All Table methods act on groups of data, or the general data structure itself. `$ewok->setHidden(true)` would be an [Entity](#entity) method, but then the Empire (Table) comes along and does `$ewoks->find('hidden')` and gets em all.
 
-- A `Table` is a collection of `Entities`. [[link]](http://book.cakephp.org/3.0/en/orm/table-objects.html#namespace-Cake\ORM)
-- Table classes are pluralized + suffixed `class EwoksTable extends Table` [[link]](http://book.cakephp.org/3.0/en/orm/table-objects.html#basic-usage)
-- located/named as follows `src/Model/Table/EwoksTable.php`
-- All Table methods act on groups of data, or the general data structure itself. 
-  - `$ewok->setHidden(true)` would be an [Entity](#entity) method, 
-  - but then the Empire (Table) comes along and does `$ewoks->find('hidden')` and gets em all. 
+- `namespace App\Model\Table;`
+- `use Cake\ORM\Table;`
+- `class EwoksTable extends Table` plural, suffixed [[link]](http://book.cakephp.org/3.0/en/orm/table-objects.html#basic-usage)
+- `src/Model/Table/EwoksTable.php` file location
+- `$this->addBehavior('Kickable')` can [Behave](#behavior) a certain way
+- `$this->belongsTo('Tribes')` plural, no prefix - can associate with other tables [[link]](http://book.cakephp.org/3.0/en/orm/associations.html)
 - `$ewoks->get('wicket-w-warrick')` will return an `$ewok` [Entity](#entity) where `$ewok->id ` is `'wicket-w-warrick'` [[link]](http://book.cakephp.org/3.0/en/orm/retrieving-data-and-resultsets.html#getting-a-single-entity-by-primary-key)
-- Tables can [Behave](#behavior) a certain way
-- Tables have lifecycle callbacks like [beforeSave()](http://book.cakephp.org/3.0/en/orm/table-objects.html#beforesave) and [afterSave()](http://book.cakephp.org/3.0/en/orm/table-objects.html#aftersave) [[link]](http://book.cakephp.org/3.0/en/orm/table-objects.html#lifecycle-callbacks)
-- Can have relationships to other Tables `Ewok belongsTo Tribe` [[link]](http://book.cakephp.org/3.0/en/orm/associations.html)
+- lifecycle callbacks like [beforeSave()](http://book.cakephp.org/3.0/en/orm/table-objects.html#beforesave) and [afterSave()](http://book.cakephp.org/3.0/en/orm/table-objects.html#aftersave) [[link]](http://book.cakephp.org/3.0/en/orm/table-objects.html#lifecycle-callbacks) 
 
 ##### Behavior
 Behaviors are ways for [Models](#model) to re-use common code. Same idea as the [Controller](#controller)-layer version called [Components](#component) and the [View](#view)-layer version, called [Helpers](#helper).
